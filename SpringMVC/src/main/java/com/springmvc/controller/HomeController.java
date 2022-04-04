@@ -16,7 +16,33 @@ import com.springjdbc.dao.StudentDao;
 
 @Controller
 public class HomeController {
-	 
+	@RequestMapping("/profile")
+	public String profile() {
+
+	    return "profile";
+	}
+	@RequestMapping("/pos")
+	public String pos() {
+
+	    return "pos";
+	}
+	@RequestMapping("/index")
+	public String index() {
+
+	    return "index";
+	}
+	@RequestMapping("/login")
+	public String login() {
+
+	    return "login";
+	}
+	
+	@RequestMapping("/usercheck")
+	public String userCheck() {
+System.out.println("awaaa");
+	    return "index";
+	}
+	
 	
 	@RequestMapping("/")
 	public String home(Model model)
@@ -35,17 +61,17 @@ public class HomeController {
 	    	  
 	       
 	       
-		model.addAttribute("name", "Charshini");
-		model.addAttribute("Id",2426);
-		List<String> names=new ArrayList<String>();
-		names.add("Husmitha");
-		names.add("MAdhubashini");
-		names.add("Abirami");
-		names.add("Karthik");
-		model.addAttribute("n",names);
+//		model.addAttribute("name", "Charshini");
+//		model.addAttribute("Id",2426);
+//		List<String> names=new ArrayList<String>();
+//		names.add("Husmitha");
+//		names.add("MAdhubashini");
+//		names.add("Abirami");
+//		names.add("Karthik");
+//		model.addAttribute("n",names);
 		
 		System.out.println("Home page called....");
-		return "index";
+		return "login";
 	}
 	@RequestMapping("/about")
 	public String about() {
