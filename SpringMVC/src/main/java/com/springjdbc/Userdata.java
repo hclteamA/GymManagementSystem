@@ -10,7 +10,7 @@ public class Userdata {
     private int id;
     private String name;
     private String img;
-    private List<User> usersById;
+   
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -56,12 +56,5 @@ public class Userdata {
         return Objects.hash(id, name, img);
     }
 
-    @OneToMany(mappedBy = "userdataById")
-    public Collection<User> getUsersById() {
-        return usersById;
-    }
-
-    public void setUsersById(List<User> usersById) {
-        this.usersById = usersById;
-    }
+   
 }

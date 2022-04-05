@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Usertype {
     private int usertypeid;
     private String usertype;
-    private List<User> usersByUsertypeid;
+  
 
     @Id
     @Column(name = "usertypeid", nullable = false)
@@ -44,12 +44,5 @@ public class Usertype {
         return Objects.hash(usertypeid, usertype);
     }
 
-    @OneToMany(mappedBy = "usertypeByUsertypeid")
-    public Collection<User> getUsersByUsertypeid() {
-        return usersByUsertypeid;
-    }
-
-    public void setUsersByUsertypeid(List<User> usersByUsertypeid) {
-        this.usersByUsertypeid = usersByUsertypeid;
-    }
+   
 }
