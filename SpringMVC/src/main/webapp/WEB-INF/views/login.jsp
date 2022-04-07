@@ -33,7 +33,7 @@
                                     </div>
                                     <form class="user" onsubmit="return validate()" action="usercheck" method="post">
                                         <div class="mb-3"><input class="form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email"><label id="e" class="form-label ">${msg1}</label></div>
-                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"><label id="p" class="form-label "></label>${msg2}</div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"><label id="p" class="form-label ">${msg2}</label></div>
                                        
                                         <div class="mb-3">
                                             <div class="custom-control custom-checkbox small">

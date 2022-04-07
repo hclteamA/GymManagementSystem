@@ -11,8 +11,8 @@ public interface StudentDao {
 	public int insert(Student student);
 	public int change(Student student);
 	public int delete(int stdId);
-	public Client getStudent(int sId);
-    public List<Client> getAllStudents();
+	public Client getClient(String sId);
+    public List<Client> getAllClients();
 	public List<Client> getStudents();
 	public Invoice getInvoice(String inv) ;
 }

@@ -35,7 +35,13 @@
        
        </bean>
        
-       <bean class="com.springjdbc.dao.StudentDaoImpl" name="stdDao">
+       <bean class="com.springjdbc.dao.ClientDAO" name="clientDao">
+       <property name="jdbcTemplate" ref="jdbcTemplate">
+           
+       </property>
+       </bean>
+       
+       <bean class="com.springjdbc.dao.InvoiceDAO" name="invoiceDao">
        <property name="jdbcTemplate" ref="jdbcTemplate">
            
        </property>
@@ -46,6 +52,10 @@
            
        </property>
        </bean>
-             
+              <bean class="com.springjdbc.dao.DashbordDAO" name="dashbordDAO">
+       <property name="jdbcTemplate" ref="jdbcTemplate">
+           
+       </property>
+       </bean>
    
    </beans>

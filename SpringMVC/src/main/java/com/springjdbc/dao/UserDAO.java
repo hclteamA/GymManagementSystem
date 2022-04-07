@@ -61,7 +61,7 @@ try {
 int i=0;
 if(std==null) {
 	String query="insert into userdata(name) values(?)";
-	int r=this.jdbcTemplate.update(query,u.getUserdataById().getName());
+	this.jdbcTemplate.update(query,u.getUserdataById().getName());
 	String query2="INSERT INTO user(username ,password,usertypeid,id,approve) VALUES(?,?,?,(SELECT id FROM userdata WHERE name=?),?)";
 	int r2=this.jdbcTemplate.update(query2,u.getUsername(),encrypt,2,u.getUserdataById().getName(),0);
 	i= r2;

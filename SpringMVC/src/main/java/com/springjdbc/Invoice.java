@@ -174,7 +174,15 @@ public class Invoice {
         return clientByCid;
     }
 
-    public void setClientByCid(Client clientByCid) {
+    @Override
+	public String toString() {
+		return "Invoice [invoiceid=" + invoiceid + ", date=" + date + ", duedate=" + duedate + ", time=" + time
+				+ ", nettotal=" + nettotal + ", payment=" + payment + ", balance=" + balance + ", cashier=" + cashier
+				+ ", cid=" + cid + ", dueamount=" + dueamount + ", type=" + type + ", remarks=" + remarks + ", inv="
+				+ inv + ", clientByCid=" + clientByCid + ", invoiceitemsByInvoiceid=" + invoiceitemsByInvoiceid + "]";
+	}
+
+	public void setClientByCid(Client clientByCid) {
         this.clientByCid = clientByCid;
     }
 

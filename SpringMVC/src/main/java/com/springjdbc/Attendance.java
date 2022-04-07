@@ -67,13 +67,5 @@ public class Attendance {
         return Objects.hash(date, intime, status, cid);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "cid", referencedColumnName = "cid", nullable = false)
-    public Client getClientByCid() {
-        return clientByCid;
-    }
-
-    public void setClientByCid(Client clientByCid) {
-        this.clientByCid = clientByCid;
-    }
+   
 }

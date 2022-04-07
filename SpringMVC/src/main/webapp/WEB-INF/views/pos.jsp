@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,7 @@
 </head>
 
 <body id="page-top">
+
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
@@ -179,10 +181,16 @@
                                             <form>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username" ><strong>Member ID</strong></label><input class="form-control" type="text" id="mID" placeholder="Member ID" name="mid"><label id ="mIDL"  for="username"><br></label></div>
+                                                        <div class="mb-3"><label class="form-label" for="username" ><strong>Member ID</strong></label><input class="form-control" type="text" id="mID" placeholder="Member ID" name="mid"/><label id ="mIDL"  for="username"><br></label></div>
                                                     </div>
+                                                    <%
+String name=(String)request.getAttribute("name");
+Integer id=(Integer)request.getAttribute("id");
+   System.out.println(name);
+
+%>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email"><br></label><input class="form-control" type="email" id="email-1" name="name"></div>
+                                                        <div class="mb-3"><label class="form-label" for="email"><br></label><input class="form-control" type="email" id="email-1" name="name" value=<%=name%>></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label" for="username"><strong>Status</strong></label><input class="form-control" type="text" id="username-1" name="st"></div>
@@ -349,7 +357,29 @@ input.addEventListener("keyup", function(event) {
        
     }
     else{
-        document.getElementById("mIDL").innerText = ''; 
+       // document.getElementById("mIDL").innerText = ''; 
+       alert("awaa");
+       var xhr = new XMLHttpRequest();
+    
+       var parameter="id="+document.getElementById("mID").value;
+       xhr.onreadystatechange = function () {
+           if (xhr.readyState == XMLHttpRequest.DONE) {
+               if (xhr.status == 200) {
+            	 
+            	   document.getElementById("email-1").value=xhr.responseText;
+                   
+               } else {
+                  
+               }
+           }
+       };
+
+       var data = 'This is my data';
+       
+       xhr.open('POST', 'http://localhost:8080/SpringMVC/checkClient', true);
+       xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+       xhr.send(parameter);
+
     }
   }
 });

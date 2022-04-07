@@ -10,7 +10,7 @@ public class Workouttype {
     private int workouttypeid;
     private String type;
     private Double price;
-    private List<Client> clientsByWorkouttypeid;
+  //  private List<Client> clientsByWorkouttypeid;
 //    private Collection<Invoiceitem> invoiceitemsByWorkouttypeid;
 
     @Id
@@ -56,14 +56,14 @@ public class Workouttype {
         return Objects.hash(workouttypeid, type, price);
     }
 
-    @OneToMany(mappedBy = "workouttypeByWorkouttypeid")
-    public Collection<Client> getClientsByWorkouttypeid() {
-        return clientsByWorkouttypeid;
-    }
-
-    public void setClientsByWorkouttypeid(List<Client> clientsByWorkouttypeid) {
-        this.clientsByWorkouttypeid = clientsByWorkouttypeid;
-    }
+//    @OneToMany(mappedBy = "workouttypeByWorkouttypeid")
+//    public Collection<Client> getClientsByWorkouttypeid() {
+//        return clientsByWorkouttypeid;
+//    }
+//
+//    public void setClientsByWorkouttypeid(List<Client> clientsByWorkouttypeid) {
+//        this.clientsByWorkouttypeid = clientsByWorkouttypeid;
+//    }
 //
 //    @OneToMany(mappedBy = "workouttypeByWorkouttypeid")
 //    public Collection<Invoiceitem> getInvoiceitemsByWorkouttypeid() {

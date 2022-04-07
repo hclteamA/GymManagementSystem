@@ -1,12 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - Brand</title>
+    <title>Dashboard</title>
    
     <link rel="stylesheet" href="<c:url value="resources/assets/bootstrap/css/bootstrap.min.css"/>"  >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -144,7 +145,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Today's Renewal</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>Rs. 40,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>Rs. ${renew}</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
                                     </div>
@@ -157,7 +158,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Today's New admission</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>Rs. 40,000</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>Rs. ${newM}</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
                                     </div>
@@ -172,7 +173,7 @@
                                             <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Today's one day</span></div>
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>Rs. 40,000</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>Rs. ${one}</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,7 +188,7 @@
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Today's member count</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>${atten}</span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
                                     </div>
@@ -202,7 +203,7 @@
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col me-2">
                                                     <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>DUE AMOUNT PAID</span></div>
-                                                    <div class="text-dark fw-bold h5 mb-0"><span>Rs. 40,000</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0"><span>Rs. ${due}</span></div>
                                                 </div>
                                                 <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                             </div>
@@ -215,7 +216,7 @@
                                             <div class="row align-items-center no-gutters">
                                                 <div class="col me-2">
                                                     <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>NET TOTAL</span></div>
-                                                    <div class="text-dark fw-bold h5 mb-0"><span>Rs. 40,000</span></div>
+                                                    <div class="text-dark fw-bold h5 mb-0"><span>Rs.${net}</span></div>
                                                 </div>
                                                 <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
                                             </div>
