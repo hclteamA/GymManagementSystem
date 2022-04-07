@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+//class Inventoryp
 @Entity
 public class Inventoryp {
     private int id;
