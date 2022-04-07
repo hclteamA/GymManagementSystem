@@ -1,8 +1,11 @@
 package com.springmvc.controller;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -21,9 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.springjdbc.Client;
 import com.springjdbc.Invoice;
+import com.springjdbc.Invoiceitem;
 import com.springjdbc.User;
 import com.springjdbc.Userdata;
 import com.springjdbc.Usertype;
+import com.springjdbc.Workouttype;
 import com.springjdbc.dao.StudentDao;
 import com.springmvc.model.Inv;
 import com.springmvc.model.Summary;
@@ -32,6 +37,7 @@ import com.springmvc.service.ClientService;
 import com.springmvc.service.DashbordService;
 import com.springmvc.service.InvoiceService;
 import com.springmvc.service.UserService;
+import com.springmvc.service.WorkoutTypeService;
 
 @Controller
 public class HomeController {
@@ -43,6 +49,8 @@ public class HomeController {
 	private ClientService clientService;
 	@Autowired
 	private InvoiceService invoiceService;
+	@Autowired
+	private WorkoutTypeService workoutTypeService;
 	
 	@RequestMapping("/profile")
 	public String profile() {
@@ -50,7 +58,17 @@ public class HomeController {
 	    return "profile";
 	}
 	@RequestMapping("/pos")
-	public String pos() {
+	public String pos(Model model) throws Exception {
+		List<Invoice>  i=invoiceService.getAllInvoice();
+		 if (i!=null) {
+             int id = Integer.parseInt(i.get(0).getInvoiceid().substring(3));
+             String i1 = String.valueOf(id + 1);
+             model.addAttribute("invid","INV" + i1);
+            
+         } else {
+        	 model.addAttribute("invid","INV1");
+            
+         }
 
 	    return "pos";
 	}
@@ -58,20 +76,69 @@ public class HomeController {
 	@PostMapping("/checkClient")
 	@ResponseBody
 	public String checkClient(@RequestParam("id") String id) throws Exception {
-	
 		List<Invoice>  i=invoiceService.getInvoiceByID(id);
 		Client c=clientService.getClient(id);
-		 String dot = new SimpleDateFormat("yyyy-MM-dd").format(i.get(0).getDuedate());
-		Inv iv =new Inv();
-		iv.setDueDate(dot);
-		iv.setName(c.getName());
+		List<Workouttype> w=workoutTypeService.getAllWorkoutType();
+		System.out.println(i);
+		String dot="";
+		String due="";
+		String pack="";
+		double price=0;
+		String packM="";	
+		double priceM=0;
+		String joinDate="";
+		if(!i.isEmpty()) {
+			dot = new SimpleDateFormat("yyyy-MM-dd").format(i.get(0).getDuedate());
+
+		}
+		if(c!=null) {
+			due=c.getName();
+			pack=c.getWorkouttypeByWorkouttypeid().getType();
+			price=c.getWorkouttypeByWorkouttypeid().getPrice();
+			joinDate=new SimpleDateFormat("yyyy-MM-dd").format(c.getDate());
+		}
 		
-		System.out.println(i.get(0).getClientByCid().getWorkouttypeByWorkouttypeid().getType());
-		return c.getName()+","+dot;
+		if(!w.isEmpty()) {
+			for(Workouttype wt:w) {
+				if(wt.getType().equals("MembershipFee")) {
+					packM=wt.getType();
+					priceM=wt.getPrice();
+				}
+			}
+
+		}
+		
+		return due+","+dot+","+pack+","+price+","+packM+","+priceM+","+joinDate;
 		
 		
 	   
 	}
+//	@PostMapping("/workoutType")
+//	@ResponseBody
+//	public String workoutType() throws Exception {
+//		List<Workouttype>  i=workoutTypeService.getAllWorkoutType();
+//	
+//		String pack="";
+//		
+//		double price=0;
+//		if(!i.isEmpty()) {
+//			for(Workouttype w:i) {
+//				if(w.getType().equals("MembershipFee")) {
+//					pack=w.getType();
+//					price=w.getPrice();
+//				}
+//			}
+//
+//		}
+//		
+//		
+//		
+//		
+//		return pack+","+price;
+//		
+//		
+//	   
+//	}
 	
 	@RequestMapping("/index")
 	public String index(Model model) throws Exception {
@@ -149,7 +216,76 @@ model.addAttribute("msg2","Invalid Password");
 	    return "login";
 	}
 	}
-	
+	@RequestMapping(path="/payment",method = RequestMethod.POST)
+	public String payment(
+	@RequestParam("mid")String mid,
+	@RequestParam("name")String name,
+	@RequestParam("st")String st,
+	@RequestParam("invi")String inv,
+	@RequestParam("duedate")String duedate,
+	@RequestParam("package")String packageM,
+	@RequestParam("price")String price,
+	@RequestParam("dis")String dis,
+	@RequestParam("nettot")String nettot,
+	@RequestParam("payment")String payment,
+	@RequestParam("balance")String balance,
+	@RequestParam("dueamount")String dueamount,Model model) throws Exception {
+	Workouttype w1=	workoutTypeService.getWorkoutType(packageM);
+	Workouttype w2=	workoutTypeService.getWorkoutType("MembershipFee");
+	Client c=clientService.getClient(mid);
+		Invoiceitem item =new Invoiceitem();
+		item.setInvoiceid(inv);
+		item.setWorkouttypeByWorkouttypeid(w1);
+		item.setWorkouttypeid(w1.getWorkouttypeid());
+		item.setTotal(Double.parseDouble(price));
+		item.setDiscount(Double.parseDouble(dis));
+		item.setInvoiceByInvoiceid(null);
+		
+		Invoiceitem newMember =new Invoiceitem();
+		newMember.setInvoiceid(inv);
+		newMember.setWorkouttypeByWorkouttypeid(w2);
+		newMember.setWorkouttypeid(w2.getWorkouttypeid());
+		newMember.setTotal(w2.getPrice());
+		newMember.setDiscount(0.0);
+		newMember.setInvoiceByInvoiceid(null);
+		Date d2 = new Date();
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+5:30"));
+        String dot = new SimpleDateFormat("yyyy-MM-dd").format(d2);
+        long now = System.currentTimeMillis();
+        Time sqlTime = new Time(now);
+		//dot = new SimpleDateFormat("yyyy-MM-dd").format(i.get(0).getDuedate());
+		final java.sql.Date sqlDate=  java.sql.Date.valueOf(dot);
+		Invoice invoice= new Invoice();
+		invoice.setInvoiceid(inv);
+		invoice.setBalance(Double.parseDouble(balance));
+		invoice.setCashier("");
+		invoice.setCid(mid);
+		invoice.setClientByCid(c);
+		invoice.setDate(sqlDate);
+		invoice.setDueamount(Double.parseDouble(dueamount));
+		invoice.setInv("");
+		invoice.setNettotal(Double.parseDouble(nettot));
+		invoice.setPayment(Double.parseDouble(payment));
+		invoice.setTime(sqlTime);
+		invoice.setType(st);
+		invoice.setRemarks("");
+		List<Invoiceitem> it =new ArrayList<Invoiceitem>();
+		
+		if(invoice.getType().equals("New")) {
+			it.add(item);
+			it.add(newMember);
+		}else {
+			it.add(item);
+		}
+		invoice.setInvoiceitemsByInvoiceid(it);
+		
+		invoiceService.insertInvoice(invoice);
+		
+		return "redirect:/pos";
+		
+		
+		
+	}
 	
 	@RequestMapping("/")
 	public String home(Model model)

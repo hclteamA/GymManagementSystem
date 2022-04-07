@@ -187,7 +187,7 @@ public class Invoice {
     }
 
     @OneToMany(mappedBy = "invoiceByInvoiceid")
-    public Collection<Invoiceitem> getInvoiceitemsByInvoiceid() {
+    public List<Invoiceitem> getInvoiceitemsByInvoiceid() {
         return invoiceitemsByInvoiceid;
     }
 

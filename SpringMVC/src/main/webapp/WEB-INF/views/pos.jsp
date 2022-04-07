@@ -172,28 +172,26 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="card shadow mb-3">
-                                        <div class="card-header d-flex flex-column flex-shrink-1 py-3">
-                                            <p class="text-primary m-0 fw-bold">Invoice Number :&nbsp;&nbsp;</p><label class="form-label">Label</label>
-                                            <p class="text-primary m-0 fw-bold">&nbsp; &nbsp;Membership Status :&nbsp;&nbsp;</p><label class="form-label">Label</label>
-                                            <p class="text-primary m-0 fw-bold">&nbsp; Member Status :&nbsp;&nbsp;</p><label class="form-label">Label</label>
-                                        </div>
+                                        
                                         <div class="card-body">
-                                            <form>
+                                            <form action="payment" method="post">
+                                             <button type=submit onclick="return false;" style="display:none;"></button>
+                                              <div class="card-header d-flex flex-column flex-shrink-1 py-3">
+                                            <p class="text-primary m-0 fw-bold">Invoice Number :&nbsp;&nbsp;</p><input style="color:black" name="invi" readonly class="form-label" value="${invid}">
+                                            <p class="text-primary m-0 fw-bold">&nbsp; &nbsp;Membership Status :&nbsp;&nbsp;</p><label class="form-label">Active</label>
+                                            <p class="text-primary m-0 fw-bold">&nbsp; Member Status :&nbsp;&nbsp;</p><label class="form-label">Active</label>
+                                        </div>
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="mb-3"><label class="form-label" for="username" ><strong>Member ID</strong></label><input class="form-control" type="text" id="mID" placeholder="Member ID" name="mid"/><label id ="mIDL"  for="username"><br></label></div>
+                                                   
                                                     </div>
-                                                    <%
-String name=(String)request.getAttribute("name");
-Integer id=(Integer)request.getAttribute("id");
-   System.out.println(name);
-
-%>
+                                                   
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email"><br></label><input class="form-control" type="email" id="email-1" name="name" value=<%=name%>></div>
+                                                        <div class="mb-3"><label class="form-label" for="email"><br></label><input readonly class="form-control" type="text" id="email-1" name="name" ></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Status</strong></label><input class="form-control" type="text" id="username-1" name="st"></div>
+                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Status</strong></label><input class="form-control" type="text" readonly id="username-1" name="st"></div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -203,20 +201,20 @@ Integer id=(Integer)request.getAttribute("id");
                                                             </select></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email"><strong>Due Date</strong></label><input class="form-control" type="email" id="email" name="duedate"></div>
+                                                        <div class="mb-3"><label class="form-label" for="email"><strong>Due Date</strong></label><input readonly class="form-control" type="text" id="email" name="duedate"></div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Package</strong></label><input class="form-control" type="text" id="first_name" name="package"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Package</strong></label><input readonly class="form-control" type="text" id="first_name" name="package"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Price</strong></label><input class="form-control" type="text" id="last_name" name="price"></div>
+                                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Price</strong></label><input readonly class="form-control" type="text" id="last_name" name="price"></div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Discount</strong></label><input class="form-control" type="text" id="first_name-1" name="package"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Discount</strong></label><input class="form-control" type="text" id="first_name-1" name="dis"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"></div>
@@ -224,7 +222,7 @@ Integer id=(Integer)request.getAttribute("id");
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Total</strong></label><input class="form-control" type="text" id="first_name-2" name="package"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Total</strong></label><input class="form-control" type="text" id="first_name-2" name="totalA"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"></div>
@@ -238,13 +236,12 @@ Integer id=(Integer)request.getAttribute("id");
                                                                     <thead>
                                                                         <tr>
                                                                             <th>Workout Type</th>
-                                                                            <th>Price</th>
                                                                             <th>Discount</th>
+                                                                            <th>Price</th>
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                        <tr></tr>
-                                                                        <tr></tr>
+                                                                    <tbody id="tab" >
+                                                                        
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -253,7 +250,7 @@ Integer id=(Integer)request.getAttribute("id");
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Net Total</strong></label><input class="form-control" type="text" id="net" name="package"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Net Total</strong></label><input class="form-control" readonly type="text" id="net" name="nettot"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"></div>
@@ -261,7 +258,7 @@ Integer id=(Integer)request.getAttribute("id");
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Payment</strong><br></label><input class="form-control" type="text" id="pay" name="package"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Payment</strong><br></label><input class="form-control" type="text" id="pay" name="payment"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"></div>
@@ -269,7 +266,7 @@ Integer id=(Integer)request.getAttribute("id");
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Balance</strong></label><input class="form-control" type="text" id="balance" name="package"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Balance</strong></label><input class="form-control" readonly type="text" id="balance" name="balance"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"></div>
@@ -277,12 +274,15 @@ Integer id=(Integer)request.getAttribute("id");
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Due Amount</strong></label><input class="form-control" type="text" id="due" name="package"></div>
+                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>Due Amount</strong></label><input class="form-control" readonly type="text" id="due" name="dueamount"></div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="mb-3"></div>
+                                                       
                                                     </div>
+                                                   
                                                 </div>
+                                                <button class="btn btn-primary d-block btn-user w-100" type="submit">Pay</button>
                                             </form>
                                         </div>
                                     </div>
@@ -331,7 +331,57 @@ Integer id=(Integer)request.getAttribute("id");
         var pay = document.getElementById("pay");
         var bal = document.getElementById("balance"); 
         var due = document.getElementById("due");
-   
+        var dis = document.getElementById("first_name-1");
+        var tot = document.getElementById("first_name-2");
+        var memPk="";
+        var memP="";
+        var totP="";
+        
+        tot.addEventListener("keyup", function(event) {
+        	
+       	 if (event.keyCode === 13) {
+       		let t= document.getElementById("first_name-2").value;
+       	    event.preventDefault();
+       	    // Trigger the button element with a click
+       	    if(t.trim()!="" && t.match(/^[0-9]+$/) != null){
+       	 var pack=    document.getElementById("first_name").value;
+       	 var dis=  document.getElementById("first_name-1").value;
+       	 var price=   document.getElementById("first_name-2").value;
+       	 
+       	 if(document.getElementById("username-1").value == "New"){
+       		document.getElementById("tab").innerHTML="<tr> <td>"+pack+"</td><td>"+dis+"</td><td id='t'>"+price+"</td></tr><tr><td>"+memPk+"</td><td>0</td><td id='t2'>"+memP+"</td></tr>";
+       		totp=parseInt(document.getElementById("t").innerText)+parseInt(document.getElementById("t2").innerText);
+       	 document.getElementById("net").value=parseInt(document.getElementById("t").innerText)+parseInt(document.getElementById("t2").innerText);
+       	 }else{
+       		document.getElementById("tab").innerHTML="<tr> <td>"+pack+"</td><td>"+dis+"</td><td id='t'>"+price+"</td></tr>";
+       		totp=parseInt(document.getElementById("t").innerText);
+       	 document.getElementById("net").value=parseInt(document.getElementById("t").innerText);
+       	 }
+       	 	
+       		document.getElementById("first_name-2").style.border = "none";
+       		document.getElementById("pay").focus();
+       	    }else{
+       	    	document.getElementById("first_name-2").style.border = "red";
+       	    }
+       	   
+       	 
+       		 }
+       
+       });
+
+        dis.addEventListener("keyup", function(event) {
+        	
+        	 if (event.keyCode === 13) {
+        		 let t= document.getElementById("first_name-1").value;
+            	    event.preventDefault();
+            	    // Trigger the button element with a click
+            	    if(t.trim()!="" && t.match(/^[0-9]+$/) != null){
+            	    	 document.getElementById("first_name-2").focus();
+            	    }
+        		  
+        		 	 }
+        });
+
 
 // Execute a function when the user releases a key on the keyboard
 input.addEventListener("keyup", function(event) {
@@ -357,17 +407,46 @@ input.addEventListener("keyup", function(event) {
        
     }
     else{
-       // document.getElementById("mIDL").innerText = ''; 
-       alert("awaa");
+    	 document.getElementById("mIDL").innerText = ''; 
+    	 document.getElementById("username-1").value = "";
+  	   document.getElementById("email").value="";
+  	   document.getElementById("email-1").value="";
+  	 document.getElementById("first_name").value="";
+  	document.getElementById("last_name").value="";
+  
        var xhr = new XMLHttpRequest();
-    
        var parameter="id="+document.getElementById("mID").value;
        xhr.onreadystatechange = function () {
            if (xhr.readyState == XMLHttpRequest.DONE) {
                if (xhr.status == 200) {
-            	 
-            	   document.getElementById("email-1").value=xhr.responseText;
-                   
+            	   let text = xhr.responseText;
+            	   if(text!=""+","+""){
+            	   const myArray = text.split(",");
+            	  
+            	   document.getElementById("email-1").value=myArray[0];
+            	   
+            	   let today = new Date().toISOString().slice(0, 10)
+            	   if(today.localeCompare(myArray[1])==1){
+            		   document.getElementById("email").style.color = "red";
+            	   }
+            	   if(today.localeCompare(myArray[6])==0){
+            		   document.getElementById("username-1").value = "New";
+            	   }else{
+            		   document.getElementById("username-1").value = "Renewal";
+            	   }
+            	   document.getElementById("email").value=myArray[1];
+            	   document.getElementById("first_name").value=myArray[2];
+            	   document.getElementById("last_name").value=myArray[3];
+            	   memPk=myArray[4];
+            	   memP=myArray[5];
+            	   document.getElementById("first_name-1").value="0";
+            	   document.getElementById("first_name-1").focus();
+            	   
+               }else{
+            	   document.getElementById("username-1").value = "";
+            	   document.getElementById("email").value="";
+            	   document.getElementById("email-1").value="";
+               }
                } else {
                   
                }
@@ -401,7 +480,7 @@ alert("No blank allowed!");
     }
   }
 });
-
+var enterPressed = 0;
 pay.addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
@@ -409,14 +488,28 @@ pay.addEventListener("keyup", function(event) {
     let pw= document.getElementById("pay").value;
     event.preventDefault();
     // Trigger the button element with a click
-    if(pw.trim()==""){
-alert("No blank allowed!");
-
-   }else if(pw.match(/^[0-9]+$/) == null)
-    {
-        document.getElementById("pay").style.color="red"; 
-        alert("Only Number allowed!");
+    if(pw.trim()!="" && pw.match(/^[0-9]+$/) != null){
+    	var balnce=parseInt(parseInt(pw)-document.getElementById("net").value);
+    if(balnce>0){
+    	document.getElementById("balance").value=balnce;
+    	document.getElementById("due").value="0";
+    	 document.getElementById("balance").style.color="green"; 
+    }else{
+    	document.getElementById("balance").value="0";
+    	document.getElementById("due").value=parseInt(balnce)*-1;
+    	 document.getElementById("due").style.color="red"; 
     }
+    
+    alert(enterPressed);
+    	   enterPressed++;
+    	 
+    	  if (parseInt(enterPressed) === parseInt(1)) {
+    	  
+    	   
+    	   enterPressed = 0
+    	  }
+
+   }
   }
 });
 

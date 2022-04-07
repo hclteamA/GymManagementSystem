@@ -8,8 +8,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springjdbc.Client;
+import com.springjdbc.Workouttype;
 @Repository
-public class ClientDAO {
+public class WorkoutTypeDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -21,24 +22,15 @@ public class ClientDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 		
-
-	public Client getClient(String sId) {
-		Client c=null;
-		String sql="select * from client c INNER JOIN workouttype w ON c.workouttypeid=w.workouttypeid where cid=?";
-		RowMapper<Client> rowMapper=new RowMapperImpl();
-		try {
-			c = this.jdbcTemplate.queryForObject(sql, rowMapper,sId);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		return c;
+	public List<Workouttype> getAllWorkoutType() {
+		String sql="select * from workouttype";
+		List<Workouttype> students = this.jdbcTemplate.query(sql,new RowMapperWorkoutImpl());
+		return students;
 	}
-	public List<Client> getAllClients() {
-		String sql="select * from client";
-		List<Client> students = this.jdbcTemplate.query(sql,new RowMapperImpl());
+	
+	public Workouttype getWorkoutType(String type) {
+		String sql="select * from workouttype WHERE type=?";
+		Workouttype students = this.jdbcTemplate.queryForObject(sql,new RowMapperWorkoutImpl(),type);
 		return students;
 	}
 

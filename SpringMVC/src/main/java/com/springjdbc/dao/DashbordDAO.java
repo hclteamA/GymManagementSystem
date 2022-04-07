@@ -42,14 +42,14 @@ public class DashbordDAO {
 			int c=0;
 	        TimeZone.setDefault(TimeZone.getTimeZone("GMT+5:30"));
 	        String dt = new SimpleDateFormat("yyyy-MM-dd").format(d2);
-			String sql="SELECT * FROM invoice WHERE date=?";
+			String sql="SELECT * FROM invoice i WHERE i.date=?";
 			String sql2="SELECT * FROM attendance WHERE date=?";
-			RowMapper<Invoice> rowMapper=new RowMapperInvImpl();
+			RowMapper<Invoice> rowMapper=new RowMapperInvIOnlympl();
 			RowMapper<Attendance> rowMapperAt=new RowMapperAttendanceImpl();
 		try {
 			
 			std = this.jdbcTemplate.query(sql, rowMapper,dt);
-			at = this.jdbcTemplate.query(sql, rowMapperAt,dt);
+			at = this.jdbcTemplate.query(sql2, rowMapperAt,dt);
 				
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -58,7 +58,7 @@ public class DashbordDAO {
 			for(Invoice inv:std) {
 				net+=inv.getPayment();
 				net2+=inv.getBalance();
-				if(inv.getType().equals("NEW")) {
+				if(inv.getType().equals("New")) {
 					ne+=(inv.getNettotal()-inv.getDueamount());
 				}
 				if(inv.getType().equals("Renewal")) {

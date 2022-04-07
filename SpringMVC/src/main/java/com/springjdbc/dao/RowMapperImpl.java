@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.springjdbc.Client;
+import com.springjdbc.Workouttype;
 
 
 public class RowMapperImpl implements RowMapper<Client>{
@@ -26,6 +27,12 @@ public class RowMapperImpl implements RowMapper<Client>{
 		st.setWorkouttypeid(rs.getInt(11));
 		st.setDate(rs.getDate(12));
 		st.setImgurl(rs.getString(13));
+		Workouttype w =new Workouttype();
+		w.setWorkouttypeid(rs.getInt("w.workouttypeid"));
+		w.setType(rs.getString("w.type"));
+		w.setPrice(rs.getDouble("w.price"));
+		
+		st.setWorkouttypeByWorkouttypeid(w);
 		return st;
 	}
 
