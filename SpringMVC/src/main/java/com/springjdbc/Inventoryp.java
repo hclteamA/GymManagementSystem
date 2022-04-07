@@ -9,7 +9,7 @@ public class Inventoryp {
     private int id;
     private String name;
     private String type;
-    private List<Inventorys> inventorysById;
+   
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -55,12 +55,5 @@ public class Inventoryp {
         return Objects.hash(id, name, type);
     }
 
-    @OneToMany(mappedBy = "inventorypByInventorypId")
-    public List<Inventorys> getInventorysById() {
-        return inventorysById;
-    }
 
-    public void setInventorysById(List<Inventorys> inventorysById) {
-        this.inventorysById = inventorysById;
-    }
 }
