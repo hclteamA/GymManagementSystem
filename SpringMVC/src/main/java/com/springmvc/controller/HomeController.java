@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springjdbc.Client;
+import com.springjdbc.Inventoryp;
 import com.springjdbc.Invoice;
 import com.springjdbc.Invoiceitem;
 import com.springjdbc.User;
@@ -35,6 +36,7 @@ import com.springmvc.model.Summary;
 import com.springmvc.model.UserM;
 import com.springmvc.service.ClientService;
 import com.springmvc.service.DashbordService;
+import com.springmvc.service.InventoryService;
 import com.springmvc.service.InvoiceService;
 import com.springmvc.service.UserService;
 import com.springmvc.service.WorkoutTypeService;
@@ -51,6 +53,31 @@ public class HomeController {
 	private InvoiceService invoiceService;
 	@Autowired
 	private WorkoutTypeService workoutTypeService;
+	@Autowired
+	private InventoryService inventoryService;
+	
+	
+	//inventory controller handlers
+	@RequestMapping("/inventory")
+	public String showInventory() {
+		return "inventory";
+	}
+	
+	//inventory add product
+	@RequestMapping(path="/processform",  method=RequestMethod.POST)
+	public String handleForm(@ModelAttribute("user") Inventoryp invp, Model model) {
+		
+		
+		int createuser = this.inventoryService.createInvp(invp);
+		
+			model.addAttribute("msg", "user created successfulyy"+ createuser);
+			return "dashboard";
+		
+	}
+		
+	
+	
+	
 	
 	@RequestMapping("/profile")
 	public String profile() {
