@@ -51,7 +51,11 @@
            
        </property>
        </bean>
-       
+       <bean class="com.springjdbc.dao.InventoryDAO" name="inventoryDao">
+       <property name="jdbcTemplate" ref="jdbcTemplate">
+           
+       </property>
+       </bean>
        <bean class="com.springjdbc.dao.UserDAO" name="userDao">
        <property name="jdbcTemplate" ref="jdbcTemplate">
            
