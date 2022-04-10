@@ -33,6 +33,7 @@ import com.springjdbc.Workouttype;
 import com.springjdbc.dao.StudentDao;
 import com.springmvc.model.Inv;
 import com.springmvc.model.Summary;
+import com.springmvc.model.User1;
 import com.springmvc.model.UserM;
 import com.springmvc.service.ClientService;
 import com.springmvc.service.DashbordService;
@@ -57,6 +58,36 @@ public class HomeController {
 	private InventoryService inventoryService;
 	
 	
+	
+	@RequestMapping("/memberReg")
+	public String showForm(Model model)
+	{
+		 String s1=null;
+		List<Client> c=clientService.getLastClient();
+		 if (c!=null) {
+		String s =c.get(0).getCid();
+        int i = Integer.parseInt(s);
+        s1 = String.valueOf(i + 1);
+		 }else {
+			 s1="1";
+		 }
+		  model.addAttribute("cid",s1);
+		return "memberReg";
+	}
+
+	@RequestMapping(path="/processForm",method=RequestMethod.POST)
+
+	public String handleForm(@ModelAttribute("user")User1 user,Model model) {
+		System.out.println("");
+		System.out.println(user);
+		
+		int createUser = this.clientService.createUser(user);
+		
+		
+		model.addAttribute("msg","user created successfully with id :"+createUser);
+		return "redirect:/memberReg";
+	}
+	
 	//inventory controller handlers
 	@RequestMapping("/inventory")
 	public String showInventory() {
@@ -74,12 +105,13 @@ public class HomeController {
 				return "";
 			
 		}
-	
-	@RequestMapping("/profile")
-	public String profile() {
+		
+		@RequestMapping("/admin")
+		public String admin() {
 
-	    return "profile";
-	}
+		    return "admin";
+		}
+	
 	@RequestMapping("/pos")
 	public String pos(Model model) throws Exception {
 		List<Invoice>  i=invoiceService.getAllInvoice();
