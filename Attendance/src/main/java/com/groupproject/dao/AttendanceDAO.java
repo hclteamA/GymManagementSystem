@@ -21,7 +21,7 @@ public class AttendanceDAO {
 		String sql = "insert into attendance(member_id, attendance_date, checkin_time, workout_type, checkout_time) "
 				+ "values(?, ?, ?, ?, ?)";
 		return jdbcTemplate.update(sql, attendance.getMemberId(), attendance.getAttendanceDate(), attendance.getCheckinTime(), 
-				attendance.getWorkoutTime(), attendance.getCheckoutTime());
+				attendance.getWorkoutType(), attendance.getCheckoutTime());
 	}
 	
 	public List<Attendance> getAttendance() {
@@ -33,7 +33,7 @@ public class AttendanceDAO {
 				attend.setMemberId(rs.getInt(2));
 				attend.setAttendanceDate(rs.getString(3));
 				attend.setCheckinTime(rs.getString(4));
-				attend.setWorkoutTime(rs.getString(5));
+				attend.setWorkoutType(rs.getString(5));
 				attend.setCheckoutTime(rs.getString(6));
 				return attend;
 			}

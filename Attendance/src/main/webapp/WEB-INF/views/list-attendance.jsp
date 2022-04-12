@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,10 +45,10 @@
                     <tbody>
                     	<c:forEach items="${list}" var="a">
 	                        <tr>
-	                            <td>${a.attendanceDate}</td>
+	                            <td>${a.memberId}</td>
 	                            <td>${a.attendanceDate}</td>
 	                            <td>${a.checkinTime}</td>
-	                            <td>${a.workoutTime}</td>
+	                            <td>${a.workoutType}</td>
 	                            <td>${a.checkoutTime}</td>
 	                        </tr>
                         </c:forEach>

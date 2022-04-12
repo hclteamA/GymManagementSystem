@@ -6,7 +6,7 @@ public class Attendance {
 	private int memberId;
 	private String attendanceDate;
 	private String checkinTime;
-	private String workoutTime;
+	private String workoutType;
 	private String checkoutTime;
 	
 	public int getAid() {
@@ -33,11 +33,11 @@ public class Attendance {
 	public void setCheckinTime(String checkinTime) {
 		this.checkinTime = checkinTime;
 	}
-	public String getWorkoutTime() {
-		return workoutTime;
+	public String getWorkoutType() {
+		return workoutType;
 	}
-	public void setWorkoutTime(String workoutTime) {
-		this.workoutTime = workoutTime;
+	public void setWorkoutType(String workoutType) {
+		this.workoutType = workoutType;
 	}
 	public String getCheckoutTime() {
 		return checkoutTime;

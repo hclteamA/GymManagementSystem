@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
     <title>Attendance</title>
 </head>
 <body>
-    <div id="title-div" class="fs-4 ps-3 fw-bold" style="letter-spacing: 2px;">
+    <div id="title-div" class="fs-4 ps-3 fw-bold t" style="letter-spacing: 2px;">
         ATTENDANCE
     </div>
 
@@ -30,31 +31,38 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <form action="save" method="post" class="pt-2">
+                <form action="save" onsubmit="return validateAttendance();" name="attendanceFrom" method="post" class="pt-2">
                     <div class="mb-3">
                         <label for="memberId" class="form-label">Member ID</label>
-                        <input type="text" name="memberId" class="form-control">
+                        <input type="text" id="memberId" name="memberId" class="form-control" placeholder="EX: 12345">
+                        <div id="errorMemberId" class="text-danger"></div>
                     </div>
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input type="date" name="attendanceDate" class="form-control">
+                        <input type="date" id="date" name="attendanceDate" class="form-control">
+                        <div id="errorDate" class="text-danger"></div>
                     </div>
                     <div class="mb-3">
                         <label for="checkinTime" class="form-label">Check-in Time</label>
-                        <input type="time" name="checkinTime" class="form-control">
+                        <input type="time" id="checkinTime" name="checkinTime" class="form-control">
+                        <div id="errorCheckin" class="text-danger"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="workoutTyep" class="form-label">Workout Type</label>
-                        <input type="text" name="workoutTyep" class="form-control">
+                        <label for="workoutType" class="form-label">Workout Type</label>
+                        <input type="text" id="workoutType" name="workoutType" class="form-control">
+                        <div id="errorWorkout" class="text-danger"></div>
                     </div>
                     <div class="mb-3">
                         <label for="checkoutTime" class="form-label">Check-out Time</label>
-                        <input type="time" name="checkoutTime" class="form-control">
+                        <input type="time" id="checkoutTime" name="checkoutTime" class="form-control">
+                        <div id="errorCheckout" class="text-danger"></div>
                     </div>
                     <button type="submit" class="btn btn-primary float-end">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+    
+    <script src="<c:url value="/resources/js/attendance.js" />"></script>
 </body>
 </html>
